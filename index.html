@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Quant Researcher - Pitch Deck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            position: relative;
+            opacity: 0;
+            animation: slideIn 0.8s forwards;
+        }
+
+        .slide:nth-child(odd) {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .slide-content {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.2); }
+        }
+
+        h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: #667eea;
+        }
+
+        h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #a78bfa;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #a0a0a0;
+            margin-bottom: 40px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-grid.three-plus-one {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-grid.three-plus-one .feature-card:nth-child(4) {
+            grid-column: 2;
+        }
+
+        @media (max-width: 1024px) {
+            .feature-grid.three-plus-one {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .feature-grid.three-plus-one .feature-card:nth-child(4) {
+                grid-column: auto;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .feature-grid.three-plus-one {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 0.6s forwards;
+            animation-delay: 0.2s;
+        }
+
+        .feature-card:nth-child(2) { animation-delay: 0.4s; }
+        .feature-card:nth-child(3) { animation-delay: 0.6s; }
+        .feature-card:nth-child(4) { animation-delay: 0.8s; }
+
+        @keyframes fadeInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .problem-list {
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .problem-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid #ef4444;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .problem-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(10px);
+        }
+
+        .solution-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .solution-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(10px);
+        }
+
+        .metric-box {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px;
+            min-width: 200px;
+            transform: scale(0);
+            animation: popIn 0.5s forwards;
+        }
+
+        .metric-box:nth-child(1) { animation-delay: 0.2s; }
+        .metric-box:nth-child(2) { animation-delay: 0.4s; }
+        .metric-box:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes popIn {
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .tech-badge {
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid #667eea;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .tech-badge:hover {
+            background: rgba(102, 126, 234, 0.4);
+            transform: scale(1.1);
+        }
+
+        .workflow-diagram {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 30px 0;
+        }
+
+        .arrow {
+            font-size: 2rem;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 40px;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.5);
+        }
+
+        .nav-dots {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot:hover {
+            background: rgba(102, 126, 234, 0.8);
+            transform: scale(1.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Dots -->
+    <div class="nav-dots">
+        <div class="dot" onclick="document.getElementById('slide1').scrollIntoView({behavior: 'smooth'})"></div>
+        <div class="dot" onclick="document.getElementById('slide2').scrollIntoView({behavior: 'smooth'})"></div>
+        <div class="dot" onclick="document.getElementById('slide3').scrollIntoView({behavior: 'smooth'})"></div>
+        <div class="dot" onclick="document.getElementById('slide4').scrollIntoView({behavior: 'smooth'})"></div>
+        <div class="dot" onclick="document.getElementById('slide5').scrollIntoView({behavior: 'smooth'})"></div>
+        <div class="dot" onclick="document.getElementById('slide6').scrollIntoView({behavior: 'smooth'})"></div>
+        <div class="dot" onclick="document.getElementById('slide7').scrollIntoView({behavior: 'smooth'})"></div>
+        <div class="dot" onclick="document.getElementById('slide8').scrollIntoView({behavior: 'smooth'})"></div>
+        <div class="dot" onclick="document.getElementById('slide9').scrollIntoView({behavior: 'smooth'})"></div>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide" id="slide1">
+        <div class="slide-content">
+            <h1>AI Quant Researcher</h1>
+            <p class="subtitle">Democratizing Quantitative Analytics in Trading</p>
+            <p style="font-size: 1.2rem; margin-top: 40px; opacity: 0.8;">
+                Zero-code research platform enabling traders and risk managers<br>
+                to perform complex quantitative analysis through natural language
+            </p>
+            <div style="margin-top: 60px; font-size: 1.1rem; opacity: 0.6;">
+                AI-Powered Quantitative Research Platform
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: The Problem -->
+    <div class="slide" id="slide2">
+        <div class="slide-content">
+            <h2>The Problem</h2>
+            <div class="problem-list">
+                <div class="problem-item">
+                    <h3>🚧 Technical Barrier</h3>
+                    <p>Many traders and risk managers understand markets deeply but are limited by programming knowledge</p>
+                </div>
+                <div class="problem-item">
+                    <h3>⏰ Time Intensive</h3>
+                    <p>Custom Jupyter notebooks required for each analysis, taking hours to complete</p>
+                </div>
+                <div class="problem-item">
+                    <h3>🔄 Repetitive Work</h3>
+                    <p>Quant researchers spend significant time on routine data cleaning and aggregation</p>
+                </div>
+                <div class="problem-item">
+                    <h3>📊 Bottleneck</h3>
+                    <p>Non-technical users depend on scarce quant researcher resources for basic analysis</p>
+                </div>
+                <div class="problem-item">
+                    <h3>🔍 Dataset Exploration</h3>
+                    <p>Even technical users find it easier to interrogate new datasets in natural language - asking how metrics are calculated, slicing and dicing, charting - rather than manually cleaning data and understanding all columns</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: The Solution -->
+    <div class="slide" id="slide3">
+        <div class="slide-content">
+            <h2>The Solution</h2>
+            <p class="subtitle">A Personal Quant Researcher for Every Trader</p>
+            <div class="feature-grid three-plus-one">
+                <div class="feature-card">
+                    <div class="icon">🧠</div>
+                    <h3>Thinks Like a Researcher</h3>
+                    <p>Multi-agent framework with specialized Research, Plotting, and Verification agents</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">💬</div>
+                    <h3>Speaks Trading Language</h3>
+                    <p>Natural language interface that understands trading terminology and context</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">⚡</div>
+                    <h3>Acts Like a Developer</h3>
+                    <p>Executes complex Python code, handles data operations, and creates visualizations</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">✅</div>
+                    <h3>Maintains Rigour</h3>
+                    <p>Verification agent independently validates results for reliability</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Technical Architecture -->
+    <div class="slide" id="slide4">
+        <div class="slide-content">
+            <h2>Technical Architecture</h2>
+            <div class="workflow-diagram">
+                <h3>LangGraph Multi-Agent Orchestration</h3>
+                <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+                    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; margin: 20px 0;">
+                        <div style="flex: 1; min-width: 250px; max-width: 400px; margin: 20px;">
+                            <div class="feature-card">
+                                <h3>Research Agent</h3>
+                                <p>Core orchestrator with access to:</p>
+                                <ul style="text-align: left; margin-top: 10px; list-style: none;">
+                                    <li>• Data sourcing tools</li>
+                                    <li>• Analytical tools</li>
+                                    <li>• Python REPL</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="arrow" style="font-size: 3rem; margin: 0 20px;">↔</div>
+                        <div style="flex: 1; min-width: 250px; max-width: 400px; margin: 20px;">
+                            <div class="feature-card">
+                                <h3>Plotting Agent</h3>
+                                <p>Visualization specialist with:</p>
+                                <ul style="text-align: left; margin-top: 10px; list-style: none;">
+                                    <li>• Plotting tools</li>
+                                    <li>• Python REPL</li>
+                                    <li>• Iterative refinement</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="arrow" style="font-size: 2rem;">↓</div>
+                    <div style="margin: 20px auto; max-width: 500px;">
+                        <div class="feature-card">
+                            <h3>Verification Agent</h3>
+                            <p>Final validation layer with:</p>
+                            <ul style="text-align: left; margin-top: 10px; list-style: none;">
+                                <li>• Analytical tools</li>
+                                <li>• Python REPL</li>
+                                <li>• Routes to user or back to Research Agent</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-stack">
+                <span class="tech-badge">LangGraph</span>
+                <span class="tech-badge">Python REPL</span>
+                <span class="tech-badge">Data Sourcing Tools</span>
+                <span class="tech-badge">Analytical Tools</span>
+                <span class="tech-badge">Plotly</span>
+                <span class="tech-badge">Custom Tools</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Key Features -->
+    <div class="slide" id="slide5">
+        <div class="slide-content">
+            <h2>Key Features</h2>
+            <div class="solution-item" style="max-width: 800px; margin: 20px auto;">
+                <h3>🔧 Specialized Trading Tools</h3>
+                <p>Window metrics, bucket aggregation, correlations, regressions - reducing token usage and errors</p>
+            </div>
+            <div class="solution-item" style="max-width: 800px; margin: 20px auto;">
+                <h3>📈 Market Data Integration</h3>
+                <p>Seamless access to real-time and historical market data through internal services</p>
+            </div>
+            <div class="solution-item" style="max-width: 800px; margin: 20px auto;">
+                <h3>🔄 Iterative Analysis</h3>
+                <p>Observation feedback loops enabling deep, iterative strategy evaluation</p>
+            </div>
+            <div class="solution-item" style="max-width: 800px; margin: 20px auto;">
+                <h3>🎯 Zero-Code Research</h3>
+                <p>Complete analytics workflow without writing a single line of code</p>
+            </div>
+            <div class="solution-item" style="max-width: 800px; margin: 20px auto;">
+                <h3>🤖 Tool Use & Multi-Turn</h3>
+                <p>Sophisticated tool selection and multi-turn conversations for complex analyses</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Impact & Results -->
+    <div class="slide" id="slide6">
+        <div class="slide-content">
+            <h2>Impact & Results</h2>
+            <div style="margin: 40px 0;">
+                <div class="metric-box">
+                    <div class="metric-value">10x</div>
+                    <div class="metric-label">Faster Analysis</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">Strong</div>
+                    <div class="metric-label">Internal Adoption</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">Zero</div>
+                    <div class="metric-label">Code Required</div>
+                </div>
+            </div>
+            <div class="feature-grid" style="margin-top: 40px;">
+                <div class="feature-card">
+                    <h3>Democratized Access</h3>
+                    <p>Non-technical users can now perform analyses previously requiring quant expertise</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Time Savings</h3>
+                    <p>Analysis time reduced from hours to minutes</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Positive Feedback</h3>
+                    <p>Strong adoption among traders and risk managers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Use Cases -->
+    <div class="slide" id="slide7">
+        <div class="slide-content">
+            <h2>Real-World Applications</h2>
+            <div class="feature-grid three-plus-one">
+                <div class="feature-card">
+                    <div class="icon">📊</div>
+                    <h3>Strategy Backtesting</h3>
+                    <p>"If I were to increase my trade sizes by 2x, 5x and 10x, what would be the additional market impact and its effect on my PnL?"</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">⚠️</div>
+                    <h3>Risk Analysis</h3>
+                    <p>"What were the major risk factors for my portfolio holdings? How have they evolved month on month?"</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📈</div>
+                    <h3>Market Impact</h3>
+                    <p>"If I were to buy 10 million USD worth of Nifty 50 constituents, what would be my estimated impact?"</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🎯</div>
+                    <h3>Performance Attribution</h3>
+                    <p>"Which stocks contributed most to my PnL? Report both top and bottom 10 percentile"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Innovation & Differentiation -->
+    <div class="slide" id="slide8">
+        <div class="slide-content">
+            <h2>Innovation & Differentiation</h2>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div class="solution-item">
+                    <h3>🚀 Beyond Chatbots</h3>
+                    <p>Not just another LLM wrapper - specialized trading capability with analytical rigour</p>
+                </div>
+                <div class="solution-item">
+                    <h3>🎯 Domain-Specific Intelligence</h3>
+                    <p>Transforms general-purpose AI into a specialized quant researcher through careful prompting and tool design</p>
+                </div>
+                <div class="solution-item">
+                    <h3>🔍 Error Reduction</h3>
+                    <p>Custom tools for repetitive operations minimize errors and token usage</p>
+                </div>
+                <div class="solution-item">
+                    <h3>✨ Built by Quants to Act Like a Quant</h3>
+                    <p>Deep understanding of quantitative workflows embedded in every interaction</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Future Vision & Call to Action -->
+    <div class="slide" id="slide9">
+        <div class="slide-content">
+            <h2>The Future of Quantitative Research</h2>
+            <p class="subtitle">Empowering every trader with AI-powered analytics</p>
+            <div style="margin: 40px 0; font-size: 1.3rem; line-height: 2;">
+                <p>✨ Expanding to more complex trading workflows</p>
+                <p>🌍 Enabling collaborative research across teams</p>
+                <p>🚀 Setting the standard for AI in quantitative finance</p>
+                <p>🎯 Making sophisticated analysis accessible to all</p>
+            </div>
+            <button class="cta-button">Let's Transform Trading Analytics Together</button>
+            <div style="margin-top: 60px; opacity: 0.7;">
+                <p>Built with passion by Aditya Jha</p>
+                <p style="margin-top: 10px;">Quantitative Research & AI</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
